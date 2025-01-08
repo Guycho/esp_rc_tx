@@ -25,4 +25,5 @@ void setup() {
 }
 
 void loop() {
+    transceiver.update_data();
 }

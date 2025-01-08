@@ -5,6 +5,8 @@
 
 
 namespace Config {
+const uint8_t num_wheels = 4;
+const uint8_t num_steering = 2;
 namespace Transceiver {
 extern const uint16_t update_delay_ms;
 }  // namespace Transceiver
