@@ -1,7 +1,12 @@
 #include "config.h"
 
 namespace Config {
-
+namespace Server {
+const char *ssid = "Guycho";
+const char *password = "0544904809";
+// const char *ssid = "OmerRobotics";
+// const char *password = "qazwsx123";
+}  // namespace Server
 namespace Transceiver {
 const uint16_t update_delay_ms = 100;
 }  // namespace Transceiver
