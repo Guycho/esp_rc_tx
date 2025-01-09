@@ -12,22 +12,22 @@
 struct InputControllerData {
     float throttle;
     float steering;
-    bool arm_toggle;
-    bool steering_mode_toggle;
-    bool drive_mode_toggle;
-    bool lock_rear_right;
-    bool lock_rear_left;
-    bool write_to_nvm;
-    bool trim_r;
-    bool trim_l;
-    bool trim_throttle;
-    bool trim_steering;
-    bool trim_direction_r;
-    bool trim_direction_l;
-    bool trim_direction_f;
-    bool trim_direction_b;
-    bool reset_trim;
-    bool new_data;
+    uint8_t arm_toggle;
+    uint8_t steering_mode_toggle;
+    uint8_t drive_mode_toggle;
+    uint8_t lock_rear_right;
+    uint8_t lock_rear_left;
+    uint8_t write_to_nvm;
+    uint8_t trim_r;
+    uint8_t trim_l;
+    uint8_t trim_throttle;
+    uint8_t trim_steering;
+    uint8_t trim_direction_r;
+    uint8_t trim_direction_l;
+    uint8_t trim_direction_f;
+    uint8_t trim_direction_b;
+    uint8_t reset_trim;
+    uint8_t new_data;
 };
 
 struct InputControllerConfig {

@@ -59,10 +59,10 @@ void ESPNowHandler::on_data_sent(const uint8_t *mac_addr, esp_now_send_status_t 
 
 void ESPNowHandler::on_data_recv(const uint8_t *mac_addr, const uint8_t *data, int data_len) {
     // Serial.print("Received data from: ");
-    for (int i = 0; i < 6; i++) {
-        Serial.printf("%02x", mac_addr[i]);
-        if (i < 5) Serial.print(":");
-    }
+    // for (int i = 0; i < 6; i++) {
+    //     Serial.printf("%02x", mac_addr[i]);
+    //     if (i < 5) Serial.print(":");
+    // }
     m_data = String((char *)data);
 
     // Serial.print(" - Data: ");

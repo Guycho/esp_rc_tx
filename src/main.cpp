@@ -18,7 +18,7 @@
         ESP32ServerConfig server_config;
         server_config.ssid = Config::Server::ssid;
         server_config.password = Config::Server::password;
-        server.init(server_config);
+        // server.init(server_config);
 
         InputControllerConfig input_config;
         input_config.mac = Config::PS4Controller::mac;

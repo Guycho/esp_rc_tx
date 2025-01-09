@@ -31,7 +31,7 @@ class Transceiver {
     ESPNowHandler *m_esp_now_handler;
     ESP32Server *m_server;
     InputControllerData m_input_controller_data;
-    
+    float two_decimals(float value);
     String m_remote_data;
     uint16_t m_update_delay_ms;
 };

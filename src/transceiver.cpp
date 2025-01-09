@@ -18,14 +18,15 @@ void Transceiver::update_data() {
     send_data();
     m_input_controller_data = get_input_data();
     m_remote_data = m_esp_now_handler->get_data();
+    // Serial.println(m_remote_data);
     m_server->update_data(m_remote_data);
 }
 
 void Transceiver::send_data() {
     JsonDocument m_json_data;
     String json;
-    m_json_data["t"] = m_input_controller_data.throttle;
-    m_json_data["s"] = m_input_controller_data.steering;
+    m_json_data["t"] = two_decimals(m_input_controller_data.throttle);
+    m_json_data["s"] = two_decimals(m_input_controller_data.steering);
     m_json_data["a"] = m_input_controller_data.arm_toggle;
     m_json_data["sm"] = m_input_controller_data.steering_mode_toggle;
     m_json_data["dm"] = m_input_controller_data.drive_mode_toggle;
@@ -44,6 +45,9 @@ void Transceiver::send_data() {
     m_json_data["nd"] = m_input_controller_data.new_data;
     serializeJson(m_json_data, json);
     m_esp_now_handler->send_data(json);
+    // Serial.println(json);
 }
 
 String Transceiver::get_remote_data() { return m_remote_data; }
+
+float Transceiver::two_decimals(float value) { return round(value * 100) / 100; }
