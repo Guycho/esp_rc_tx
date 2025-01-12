@@ -9,15 +9,13 @@
 #include "config.h"
 #include "input.h"
 
-struct TransceiverConfig
-{
+struct TransceiverConfig {
     uint16_t update_delay_ms;
     ESPNowHandler *esp_now_handler;
 };
 
-class Transceiver
-{
-public:
+class Transceiver {
+   public:
     Transceiver();
     ~Transceiver();
 
@@ -26,7 +24,10 @@ public:
     void send_data();
     String get_remote_data();
 
-private:
+   private:
+    float two_decimals(float value);
+
+    Chrono m_data_timer;
     ESPNowHandler *m_esp_now_handler;
     InputControllerData m_input_controller_data;
     String m_remote_data;
@@ -34,4 +35,4 @@ private:
     uint8_t m_data_index = 0;
 };
 
-#endif // ESP32SERVER_HPP
+#endif  // ESP32SERVER_HPP
