@@ -6,7 +6,6 @@ Transceiver::~Transceiver() {}
 
 void Transceiver::init(const TransceiverConfig& config) {
     m_esp_now_handler = config.esp_now_handler;
-    m_server = config.server;
     m_update_delay_ms = config.update_delay_ms;
     m_data_timer.start();
 }
@@ -18,8 +17,7 @@ void Transceiver::update_data() {
     send_data();
     m_input_controller_data = get_input_data();
     m_remote_data = m_esp_now_handler->get_data();
-    // Serial.println(m_remote_data);
-    m_server->update_data(m_remote_data);
+    Serial.println(m_remote_data);
 }
 
 void Transceiver::send_data() {
@@ -45,7 +43,6 @@ void Transceiver::send_data() {
     m_json_data["nd"] = m_input_controller_data.new_data;
     serializeJson(m_json_data, json);
     m_esp_now_handler->send_data(json);
-    // Serial.println(json);
 }
 
 String Transceiver::get_remote_data() { return m_remote_data; }

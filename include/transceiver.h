@@ -6,13 +6,11 @@
 #include <WiFi.h>
 
 #include "ESP_now_handler.h"
-#include "ESP32_server.h"
 #include "config.h"
 #include "input.h"
 
 struct TransceiverConfig {
     uint16_t update_delay_ms;
-    ESP32Server *server;
     ESPNowHandler *esp_now_handler;
 };
 
@@ -29,7 +27,6 @@ class Transceiver {
    private:
     Chrono m_data_timer;
     ESPNowHandler *m_esp_now_handler;
-    ESP32Server *m_server;
     InputControllerData m_input_controller_data;
     float two_decimals(float value);
     String m_remote_data;

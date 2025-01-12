@@ -20,6 +20,8 @@ extern const float dead_band;
 }  // namespace PS4Controller
 namespace ESPNow {
 extern const uint8_t peer_mac_address[];
+extern const bool use_lr;
+extern const bool print_debug;
 }  // namespace ESPNow
 }  // namespace Config
 #endif  // CONFIG_H
