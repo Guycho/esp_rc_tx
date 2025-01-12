@@ -14,7 +14,6 @@ void Transceiver::update_data() {
     if (!m_data_timer.hasPassed(m_update_delay_ms, true)) {
         return;
     }
-    send_data();
     m_input_controller_data = get_input_data();
     m_remote_data = m_esp_now_handler->get_data();
     Serial.println(m_remote_data);
@@ -23,6 +22,9 @@ void Transceiver::update_data() {
 void Transceiver::send_data() {
     JsonDocument m_json_data;
     String json;
+    if (m_input_controller_data.new_data) {
+        m_data_index++;
+    }
     m_json_data["t"] = two_decimals(m_input_controller_data.throttle);
     m_json_data["s"] = two_decimals(m_input_controller_data.steering);
     m_json_data["a"] = m_input_controller_data.arm_toggle;
@@ -40,7 +42,7 @@ void Transceiver::send_data() {
     m_json_data["tdf"] = m_input_controller_data.trim_direction_f;
     m_json_data["tdb"] = m_input_controller_data.trim_direction_b;
     m_json_data["rt"] = m_input_controller_data.reset_trim;
-    m_json_data["nd"] = m_input_controller_data.new_data;
+    m_json_data["nd"] = m_data_index;
     serializeJson(m_json_data, json);
     m_esp_now_handler->send_data(json);
 }
