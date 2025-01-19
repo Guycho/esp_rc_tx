@@ -10,4 +10,3 @@ const bool use_lr = true;
 const bool print_debug = true;
 }  // namespace ESPNow
 }  // namespace Config
-         
