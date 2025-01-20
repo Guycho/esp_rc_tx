@@ -9,6 +9,7 @@ struct PotReaderConfig {
     uint8_t pin;
     uint16_t min_input_value;
     uint16_t max_input_value;
+    float mid_pct_input_value;
     bool reverse;
 };
 
@@ -27,6 +28,7 @@ class PotReader {
     float m_dead_band;
     float m_min_input_value;
     float m_max_input_value;
+    float m_mid_pct_input_value;
     float m_min_output_value;
     float m_max_output_value;
 

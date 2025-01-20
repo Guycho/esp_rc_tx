@@ -3,7 +3,9 @@
 
 #include <Arduino.h>
 #include <Chrono.h>
-#includer ""
+#include "pin_reader.h"
+#include "pot_reader.h"
+
 struct InputControllerData {
     float throttle;
     float steering;

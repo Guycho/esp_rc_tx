@@ -17,6 +17,7 @@ const uint8_t potentiometers_pins[num_potentiometers] = {A0, A1};
 const uint16_t potentiometers_min_input_values[num_potentiometers] = {0.0, 0.0};
 const uint16_t potentiometers_max_input_values[num_potentiometers] = {1023.0, 1023.0};
 const bool potentiometers_reverse[num_potentiometers] = {false, false};
+const float potentiometers_mid_pct_input_values[num_potentiometers] = {50.0, 50.0};
 namespace Transceiver {
 extern const uint16_t update_delay_ms;
 }  // namespace Transceiver
