@@ -30,6 +30,7 @@ void setup() {
         pot_reader_config.pin = Config::potentiometers_pins[i];
         pot_reader_config.min_input_value = Config::potentiometers_min_input_values[i];
         pot_reader_config.max_input_value = Config::potentiometers_max_input_values[i];
+        pot_reader_config.mid_pct_input_value = Config::potentiometers_mid_pct_input_values[i];
         pot_reader_config.reverse = Config::potentiometers_reverse[i];
         pot_readers[i].init(pot_reader_config);
     }

@@ -32,19 +32,20 @@ void Transceiver::send_data() {
     uint32_t bitmask = 0;
     bitmask |= (scaled_throttle << 0);   // 9 bits for throttle
     bitmask |= (scaled_steering << 9);  // 9 bits for steering
-    bitmask |= (m_input_controller_data.left_arrow << 19);
-    bitmask |= (m_input_controller_data.right_arrow << 20);
-    bitmask |= (m_input_controller_data.up_arrow << 21);
-    bitmask |= (m_input_controller_data.down_arrow << 22);
-    bitmask |= (m_input_controller_data.sel << 23);
-    bitmask |= (m_input_controller_data.ch << 24);
-    bitmask |= (m_input_controller_data.plus << 25);
-    bitmask |= (m_input_controller_data.minus << 26);
-    bitmask |= (m_input_controller_data.left_trim_l << 27);
-    bitmask |= (m_input_controller_data.left_trim_r << 28);
-    bitmask |= (m_input_controller_data.right_trim_l << 29);
-    bitmask |= (m_input_controller_data.right_trim_r << 30);
-    bitmask |= (m_input_controller_data.edge_switch << 31);
+    bitmask |= (m_input_controller_data.left_arrow << 18);
+    bitmask |= (m_input_controller_data.right_arrow << 19);
+    bitmask |= (m_input_controller_data.up_arrow << 20);
+    bitmask |= (m_input_controller_data.down_arrow << 21);
+    bitmask |= (m_input_controller_data.sel << 22);
+    bitmask |= (m_input_controller_data.ch << 23);
+    bitmask |= (m_input_controller_data.plus << 24);
+    bitmask |= (m_input_controller_data.minus << 25);
+    bitmask |= (m_input_controller_data.left_trim_l << 26);
+    bitmask |= (m_input_controller_data.left_trim_r << 27);
+    bitmask |= (m_input_controller_data.right_trim_l << 28);
+    bitmask |= (m_input_controller_data.right_trim_r << 29);
+    bitmask |= (m_input_controller_data.edge_switch << 30);
+    bitmask |= (m_input_controller_data.bottom_switch << 31);
 
     // Add the bitmask to the JSON document
     m_json_data["b"] = bitmask;
