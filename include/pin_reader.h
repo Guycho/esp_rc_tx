@@ -23,5 +23,6 @@ class PinReader {
     uint8_t m_pin;
     uint16_t m_debounce_delay_ms;
     bool m_on_state;
+    bool m_state;
 };
 #endif  // PIN_READER_H

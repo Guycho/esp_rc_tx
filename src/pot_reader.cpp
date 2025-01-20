@@ -33,4 +33,4 @@ void PotReader::run() {
     m_value = Calcs::calc_dead_band(mapped_value, m_max_output_value, m_dead_band);
 }
 
-bool PotReader::get_value() { return m_value; }
+float PotReader::get_value() { return m_value; }

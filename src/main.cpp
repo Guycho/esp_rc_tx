@@ -16,6 +16,8 @@ ESPNowHandler esp_now_handler(Config::ESPNow::peer_mac_address, Config::ESPNow::
 Transceiver transceiver;
 
 void setup() {
+    Serial.begin(9600);
+
     for (uint8_t i = 0; i < Config::num_buttons; i++) {
         PinReaderConfig pin_reader_config;
         pin_reader_config.pin = Config::buttons_pins[i];
@@ -31,6 +33,7 @@ void setup() {
         pot_reader_config.reverse = Config::potentiometers_reverse[i];
         pot_readers[i].init(pot_reader_config);
     }
+
     InputControllerConfig input_controller_config;
     for (uint8_t i = 0; i < Config::num_buttons; i++) {
         input_controller_config.buttons[i] = &pin_readers[i];
@@ -40,17 +43,22 @@ void setup() {
     }
     input_controller.init(input_controller_config);
 
-    Serial.begin(9600);
-
     esp_now_handler.init();
 
     TransceiverConfig transceiver_config;
     transceiver_config.update_delay_ms = Config::Transceiver::update_delay_ms;
     transceiver_config.esp_now_handler = &esp_now_handler;
+    transceiver_config.input_controller = &input_controller;
     transceiver.init(transceiver_config);
 }
 
 void loop() {
+    for (uint8_t i = 0; i < Config::num_buttons; i++) {
+        pin_readers[i].run();
+    }
+    for (uint8_t i = 0; i < Config::num_potentiometers; i++) {
+        pot_readers[i].run();
+    }
     input_controller.run();
     transceiver.run();
 }

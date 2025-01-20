@@ -12,12 +12,6 @@ void InputController::init(const InputControllerConfig &config) {
     }
 }
 void InputController::run() {
-    for (uint8_t i = 0; i < num_buttons; i++) {
-        m_buttons[i]->run();
-    }
-    for (uint8_t i = 0; i < num_potentiometers; i++) {
-        m_potentiometers[i]->run();
-    }
     m_data.throttle = m_potentiometers[THROTTLE]->get_value();
     m_data.steering = m_potentiometers[STEERING]->get_value();
     m_data.left_arrow = m_buttons[LEFT_ARROW]->get_state();

@@ -18,7 +18,6 @@ void Transceiver::run() {
     m_input_controller_data = m_input_controller->get_data();
     send_data();
     m_remote_data = m_esp_now_handler->get_data();
-    Serial.println(m_remote_data);
 }
 
 void Transceiver::send_data() {
@@ -50,6 +49,7 @@ void Transceiver::send_data() {
     // Add the bitmask to the JSON document
     m_json_data["b"] = bitmask;
     serializeJson(m_json_data, json);
+
     // Calculate checksum (XOR of all bytes)
     uint8_t checksum = 0;
     for (size_t i = 0; i < json.length(); ++i) {
@@ -57,7 +57,6 @@ void Transceiver::send_data() {
     }
     // Add checksum to the JSON document
     m_json_data["c"] = checksum;
-
     // Serialize JSON again to include the checksum
     serializeJson(m_json_data, json);
     m_esp_now_handler->send_data(json);

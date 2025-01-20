@@ -20,7 +20,8 @@ class PotReader {
 
     void init(const PotReaderConfig &config);
     void run();
-    bool get_value();
+    float get_value();
+
    private:
     uint8_t m_pin;
     bool m_reverse;
