@@ -3,8 +3,8 @@
 
 #include <Arduino.h>
 #include <Chrono.h>
-#include <config.h>
-#include <utils.h>
+#include "config.h"
+#include "utils.h"
 struct PotReaderConfig {
     uint8_t pin;
     uint16_t min_input_value;

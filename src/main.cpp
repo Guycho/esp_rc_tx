@@ -10,7 +10,7 @@
 
 PinReader pin_readers[Config::num_buttons];
 PotReader pot_readers[Config::num_potentiometers];
-
+InputController input_controller;
 ESPNowHandler esp_now_handler(Config::ESPNow::peer_mac_address, Config::ESPNow::use_lr,
   Config::ESPNow::print_debug);
 Transceiver transceiver;
@@ -31,7 +31,15 @@ void setup() {
         pot_reader_config.reverse = Config::potentiometers_reverse[i];
         pot_readers[i].init(pot_reader_config);
     }
-    
+    InputControllerConfig input_controller_config;
+    for (uint8_t i = 0; i < Config::num_buttons; i++) {
+        input_controller_config.buttons[i] = &pin_readers[i];
+    }
+    for (uint8_t i = 0; i < Config::num_potentiometers; i++) {
+        input_controller_config.potentiometers[i] = &pot_readers[i];
+    }
+    input_controller.init(input_controller_config);
+
     Serial.begin(9600);
 
     esp_now_handler.init();
@@ -42,4 +50,7 @@ void setup() {
     transceiver.init(transceiver_config);
 }
 
-void loop() {}
+void loop() {
+    input_controller.run();
+    transceiver.run();
+}

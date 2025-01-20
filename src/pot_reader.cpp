@@ -18,17 +18,17 @@ void PotReader::init(const PotReaderConfig &config) {
 
 void PotReader::run() {
     float temp_value =
-      Utils::constrain_float(analogRead(m_pin), m_min_input_value, m_max_input_value);
-    temp_value = m_reverse ? Utils::map_float(temp_value, m_max_input_value, m_min_input_value,
+      Calcs::constrain_float(analogRead(m_pin), m_min_input_value, m_max_input_value);
+    temp_value = m_reverse ? Calcs::map_float(temp_value, m_max_input_value, m_min_input_value,
                                m_min_output_value, m_max_output_value)
-                           : Utils::map_float(temp_value, m_min_input_value, m_max_input_value,
+                           : Calcs::map_float(temp_value, m_min_input_value, m_max_input_value,
                                m_min_output_value, m_max_output_value);
     float mapped_value = temp_value > m_mid_pct_input_value
-                           ? Utils::map_float(temp_value, m_mid_pct_input_value, m_max_output_value,
+                           ? Calcs::map_float(temp_value, m_mid_pct_input_value, m_max_output_value,
                                0, m_max_output_value)
-                           : Utils::map_float(temp_value, m_min_output_value, m_mid_pct_input_value,
+                           : Calcs::map_float(temp_value, m_min_output_value, m_mid_pct_input_value,
                                m_min_output_value, 0);
-    m_value = abs(mapped_value) < m_dead_band ? 0 : mapped_value;
+    m_value = Calcs::calc_dead_band(mapped_value, m_max_output_value, m_dead_band);
 }
 
 bool PotReader::get_value() { return m_value; }

@@ -18,7 +18,7 @@ float calc_dead_band(float x, float max_output, float dead_band) {
         return 0;
     }
     int sign = x > 0 ? 1 : -1;
-    float abs_temp = Utils::Calcs::map_float(abs(x), dead_band, max_output, 0, max_output);
+    float abs_temp = map_float(abs(x), dead_band, max_output, 0, max_output);
     float scaled_temp = sign * abs_temp;
     return scaled_temp;
 }
@@ -35,4 +35,6 @@ float calc_alpha(float a, float b, float c) {
     float alpha = acos((a * a + b * b - c * c) / (2 * a * b));
     return alpha;
 }
-}  // namespace Utils
+float two_decimals(float value) { return (round(value * 100) / 100); }
+
+}  // namespace Calcs

@@ -10,8 +10,10 @@
 #include "input.h"
 
 struct TransceiverConfig {
-    uint16_t update_delay_ms;
+    InputController *input_controller;
     ESPNowHandler *esp_now_handler;
+
+    uint16_t update_delay_ms;
 };
 
 class Transceiver {
@@ -20,15 +22,17 @@ class Transceiver {
     ~Transceiver();
 
     void init(const TransceiverConfig &config);
-    void update_data();
+    void run();
+
+   private:
+    ESPNowHandler *m_esp_now_handler;
+    InputController *m_input_controller;
+
     void send_data();
     String get_remote_data();
 
-   private:
-    float two_decimals(float value);
-
     Chrono m_data_timer;
-    ESPNowHandler *m_esp_now_handler;
+
     InputControllerData m_input_controller_data;
     String m_remote_data;
     uint16_t m_update_delay_ms;
