@@ -12,7 +12,9 @@ void PotReader::init(const PotReaderConfig &config) {
     m_mid_pct_input_value = config.mid_pct_input_value;
     m_min_output_value = -Config::max_output_value;
     m_max_output_value = Config::max_output_value;
-    pinMode(m_pin, INPUT);
+    analogSetWidth(Config::analog_read_resolution);
+    analogReadResolution(Config::analog_read_resolution);
+    adcAttachPin(m_pin);
     m_value = 0;
 }
 
