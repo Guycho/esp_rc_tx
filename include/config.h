@@ -19,7 +19,7 @@ enum ButtonName {
     RIGHT_TRIM_R = 11,
     EDGE_SWITCH = 12,
     BOTTOM_SWITCH = 13
-};
+}; // Update numbers to match physical remote
 
 enum PotentiometerName { THROTTLE = 0, STEERING = 1 };
 const uint16_t debounce_delay_ms = 50;
@@ -27,10 +27,8 @@ const uint8_t num_buttons = 14;
 const uint8_t buttons_pins[num_buttons] = {32, 33, 25, 26, 27, 14, 12, 13, 23, 22, 21, 19, 18, 5};
 const bool buttons_on_states[num_buttons] = {false, false, false, false, false, false, false, false,
   false, false, false, false, false, false};
-const bool buttons_type_event[num_buttons] = {false, false, false, false, false, false, false,
-  false, false, false, true, false, false, false};
-// const bool buttons_type_event[num_buttons] = {true, true, true, true, true, true, true, true, true,
-//   true, true, true, false, false};
+const bool buttons_type_event[num_buttons] = {false, false, false, false, true, true, true, true,
+  true, false, false, false, false, false}; // update after changing pin name in enum
 const float potentiometers_dead_band = 5.0;
 const double max_output_value = 100.0;
 const uint8_t num_potentiometers = 2;
