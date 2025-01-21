@@ -22,6 +22,7 @@ void setup() {
         PinReaderConfig pin_reader_config;
         pin_reader_config.pin = Config::buttons_pins[i];
         pin_reader_config.on_state = Config::buttons_on_states[i];
+        pin_reader_config.type_event = Config::buttons_type_event[i];
         pin_readers[i].init(pin_reader_config);
     }
 
@@ -54,12 +55,5 @@ void setup() {
 }
 
 void loop() {
-    for (uint8_t i = 0; i < Config::num_buttons; i++) {
-        pin_readers[i].run();
-    }
-    for (uint8_t i = 0; i < Config::num_potentiometers; i++) {
-        pot_readers[i].run();
-    }
-    input_controller.run();
     transceiver.run();
 }

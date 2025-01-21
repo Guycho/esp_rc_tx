@@ -27,6 +27,10 @@ const uint8_t num_buttons = 14;
 const uint8_t buttons_pins[num_buttons] = {32, 33, 25, 26, 27, 14, 12, 13, 23, 22, 21, 19, 18, 5};
 const bool buttons_on_states[num_buttons] = {false, false, false, false, false, false, false, false,
   false, false, false, false, false, false};
+const bool buttons_type_event[num_buttons] = {false, false, false, false, false, false, false,
+  false, false, false, true, false, false, false};
+// const bool buttons_type_event[num_buttons] = {true, true, true, true, true, true, true, true, true,
+//   true, true, true, false, false};
 const float potentiometers_dead_band = 5.0;
 const double max_output_value = 100.0;
 const uint8_t num_potentiometers = 2;
@@ -42,7 +46,7 @@ const uint16_t update_delay_ms = 100;
 namespace ESPNow {
 const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
 const bool use_lr = true;
-const bool print_debug = true;
+const bool print_debug = false;
 }  // namespace ESPNow
 }  // namespace Config
 #endif  // CONFIG_H
