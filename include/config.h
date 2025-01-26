@@ -45,5 +45,10 @@ const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
 const bool use_lr = true;
 const bool print_debug = false;
 }  // namespace ESPNow
+namespace OTAHandler {
+const uint8_t num_networks = 3;
+extern const char *credentials[][2];
+extern const char *hostname;
+}  // namespace OTAHandler
 }  // namespace Config
 #endif  // CONFIG_H

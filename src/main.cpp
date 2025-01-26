@@ -4,15 +4,17 @@
 
 #include "config.h"
 #include "input.h"
-#include "transceiver.h"
+#include "ota_handler.h"
 #include "pin_reader.h"
 #include "pot_reader.h"
+#include "transceiver.h"
 
 PinReader pin_readers[Config::num_buttons];
 PotReader pot_readers[Config::num_potentiometers];
 InputController input_controller;
 ESPNowHandler esp_now_handler(Config::ESPNow::peer_mac_address, Config::ESPNow::use_lr,
   Config::ESPNow::print_debug);
+OTAHandler ota_handler(Config::OTAHandler::hostname, Config::OTAHandler::credentials, Config::OTAHandler::num_networks);
 Transceiver transceiver;
 
 void setup() {

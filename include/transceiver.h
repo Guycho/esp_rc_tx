@@ -5,7 +5,8 @@
 #include <Chrono.h>
 #include <WiFi.h>
 
-#include "ESP_now_handler.h"
+#include <ESP_now_handler.h>
+#include "ota_handler.h"
 #include "config.h"
 #include "input.h"
 
