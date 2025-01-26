@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 #include <Arduino.h>
-
+#include "credentials.h"
 namespace Config {
 enum ButtonName {
     EDGE_SWITCH = 0,
