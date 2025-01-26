@@ -57,6 +57,6 @@ void loop() {
     transceiver.run();
     ota_handler.run();
 
-    delay(250);
-    TelnetStream.println(millis());
+    // delay(250);
+    // TelnetStream.println(millis());
 }
