@@ -2,6 +2,7 @@
 #include <Chrono.h>
 #include <ESP_now_handler.h>
 #include <OTAHandler.h>
+#include <TelnetStream.h>
 
 #include "config.h"
 #include "input.h"
@@ -58,9 +59,14 @@ void setup() {
     transceiver.init(transceiver_config);
 
     ota_handler.init();
+
+    TelnetStream.begin();
 }
 
 void loop() {
     transceiver.run();
     ota_handler.run();
+
+    delay(250);
+    TelnetStream.println(millis());
 }
