@@ -22,12 +22,13 @@ Transceiver transceiver;
 
 void setup() {
     Serial.begin(9600);
-
+    InputControllerConfig input_controller_config;
     for (uint8_t i = 0; i < Config::num_buttons; i++) {
         PinReaderConfig pin_reader_config = {.pin = Config::buttons_pins[i],
           .on_state = Config::buttons_on_states[i],
           .type_event = Config::buttons_type_event[i]};
         pin_readers[i].init(pin_reader_config);
+        input_controller_config.buttons[i] = &pin_readers[i];
     }
 
     for (uint8_t i = 0; i < Config::num_potentiometers; i++) {
@@ -37,13 +38,6 @@ void setup() {
           .mid_pct_input_value = Config::potentiometers_mid_pct_input_values[i],
           .reverse = Config::potentiometers_reverse[i]};
         pot_readers[i].init(pot_reader_config);
-    }
-
-    InputControllerConfig input_controller_config;
-    for (uint8_t i = 0; i < Config::num_buttons; i++) {
-        input_controller_config.buttons[i] = &pin_readers[i];
-    }
-    for (uint8_t i = 0; i < Config::num_potentiometers; i++) {
         input_controller_config.potentiometers[i] = &pot_readers[i];
     }
     input_controller.init(input_controller_config);
