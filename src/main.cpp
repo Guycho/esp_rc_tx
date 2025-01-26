@@ -14,7 +14,9 @@ PotReader pot_readers[Config::num_potentiometers];
 InputController input_controller;
 ESPNowHandler esp_now_handler(Config::ESPNow::peer_mac_address, Config::ESPNow::use_lr,
   Config::ESPNow::print_debug);
-OTAHandler ota_handler(Config::OTAHandler::hostname, Config::OTAHandler::credentials, Config::OTAHandler::num_networks);
+OTAHandler ota_handler(Config::OTAHandler::hostname, Config::OTAHandler::credentials,
+  Config::OTAHandler::num_networks, Config::OTAHandler::timeout_sec,
+  Config::OTAHandler::print_debug);
 Transceiver transceiver;
 
 void setup() {
@@ -54,8 +56,11 @@ void setup() {
     transceiver_config.esp_now_handler = &esp_now_handler;
     transceiver_config.input_controller = &input_controller;
     transceiver.init(transceiver_config);
+
+    ota_handler.init();
 }
 
 void loop() {
     transceiver.run();
+    ota_handler.run();
 }

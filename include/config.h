@@ -42,11 +42,13 @@ const uint16_t update_delay_ms = 25;
 }  // namespace Transceiver
 namespace ESPNow {
 const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
-const bool use_lr = true;
+const bool use_lr = false;
 const bool print_debug = false;
 }  // namespace ESPNow
 namespace OTAHandler {
 const uint8_t num_networks = 3;
+const uint16_t timeout_sec = 60;
+const bool print_debug = false;
 extern const char *credentials[][2];
 extern const char *hostname;
 }  // namespace OTAHandler
