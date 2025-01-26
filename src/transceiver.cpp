@@ -47,20 +47,15 @@ void Transceiver::send_data() {
     bitmask |= (m_input_controller_data.edge_switch << 30);
     bitmask |= (m_input_controller_data.bottom_switch << 31);
 
-    // Add the bitmask to the JSON document
     m_json_data["b"] = bitmask;
     serializeJson(m_json_data, json);
 
-    // Calculate checksum (XOR of all bytes)
     uint8_t checksum = 0;
-    for (size_t i = 0; i < json.length(); ++i) {
-        checksum ^= json[i];
+    for (char c : json) {
+        checksum ^= c;
     }
-    // Add checksum to the JSON document
     m_json_data["c"] = checksum;
-    // Serialize JSON again to include the checksum
     serializeJson(m_json_data, json);
     m_esp_now_handler->send_data(json);
 }
-
 String Transceiver::get_remote_data() { return m_remote_data; }

@@ -24,20 +24,18 @@ void setup() {
     Serial.begin(9600);
 
     for (uint8_t i = 0; i < Config::num_buttons; i++) {
-        PinReaderConfig pin_reader_config;
-        pin_reader_config.pin = Config::buttons_pins[i];
-        pin_reader_config.on_state = Config::buttons_on_states[i];
-        pin_reader_config.type_event = Config::buttons_type_event[i];
+        PinReaderConfig pin_reader_config = {.pin = Config::buttons_pins[i],
+          .on_state = Config::buttons_on_states[i],
+          .type_event = Config::buttons_type_event[i]};
         pin_readers[i].init(pin_reader_config);
     }
 
     for (uint8_t i = 0; i < Config::num_potentiometers; i++) {
-        PotReaderConfig pot_reader_config;
-        pot_reader_config.pin = Config::potentiometers_pins[i];
-        pot_reader_config.min_input_value = Config::potentiometers_min_input_values[i];
-        pot_reader_config.max_input_value = Config::potentiometers_max_input_values[i];
-        pot_reader_config.mid_pct_input_value = Config::potentiometers_mid_pct_input_values[i];
-        pot_reader_config.reverse = Config::potentiometers_reverse[i];
+        PotReaderConfig pot_reader_config = {.pin = Config::potentiometers_pins[i],
+          .min_input_value = Config::potentiometers_min_input_values[i],
+          .max_input_value = Config::potentiometers_max_input_values[i],
+          .mid_pct_input_value = Config::potentiometers_mid_pct_input_values[i],
+          .reverse = Config::potentiometers_reverse[i]};
         pot_readers[i].init(pot_reader_config);
     }
 
@@ -52,17 +50,15 @@ void setup() {
 
     esp_now_handler.init();
 
-    TransceiverConfig transceiver_config;
-    transceiver_config.update_delay_ms = Config::Transceiver::update_delay_ms;
-    transceiver_config.esp_now_handler = &esp_now_handler;
-    transceiver_config.input_controller = &input_controller;
+    TransceiverConfig transceiver_config = {.input_controller = &input_controller,
+      .esp_now_handler = &esp_now_handler,
+      .update_delay_ms = Config::Transceiver::update_delay_ms};
     transceiver.init(transceiver_config);
 
     ota_handler.init();
 
     TelnetStream.begin();
 }
-
 void loop() {
     transceiver.run();
     ota_handler.run();
