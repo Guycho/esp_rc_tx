@@ -19,6 +19,7 @@ void Transceiver::run() {
     if (!(m_remote_data.length() == 0 || !verify_checksum(m_remote_data))) {
         m_telemetry_data = parse_remote_data(m_remote_data);
     }
+    m_input_controller_data = m_input_controller->get_data();
     send_data();
 }
 
