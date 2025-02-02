@@ -1,10 +1,9 @@
 #include "bt_app_connector.h"
 
-BTAppConnector::BTAppConnector(){}
-BTAppConnector::~BTAppConnector(){}
+BTAppConnector::BTAppConnector() {}
+BTAppConnector::~BTAppConnector() {}
 
-void BTAppConnector::init(const BTAppConnectorConfig &config)
-{
+void BTAppConnector::init(const BTAppConnectorConfig &config) {
     m_bt_serial = config.bt_serial;
     m_transceiver = config.transceiver;
     m_update_delay_ms = 1e3 / config.update_rate_hz;
@@ -13,8 +12,8 @@ void BTAppConnector::init(const BTAppConnectorConfig &config)
     m_bt_serial->begin(config.device_name);
 }
 
-void BTAppConnector::run(){
-    if (!m_data_timer.hasPassed(m_update_delay_ms, true)){
+void BTAppConnector::run() {
+    if (!m_data_timer.hasPassed(m_update_delay_ms, true)) {
         return;
     }
     TelemetryData telemetry_data = m_transceiver->get_telemetry_data();

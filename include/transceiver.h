@@ -3,12 +3,11 @@
 
 #include <ArduinoJson.h>
 #include <Chrono.h>
+#include <ESP_now_handler.h>
 #include <WiFi.h>
 
-#include <ESP_now_handler.h>
 #include "config.h"
 #include "input.h"
-
 
 struct TelemetryData {
     bool arm_state;

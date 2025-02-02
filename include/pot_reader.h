@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <Chrono.h>
+
 #include "config.h"
 #include "utils.h"
 struct PotReaderConfig {
@@ -32,6 +33,5 @@ class PotReader {
     float m_mid_pct_input_value;
     float m_min_output_value;
     float m_max_output_value;
-
 };
 #endif  // PIN_READER_H

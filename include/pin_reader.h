@@ -19,6 +19,7 @@ class PinReader {
     void init(const PinReaderConfig &config);
     void run();
     bool get_state();
+
    private:
     Chrono m_debounce_timer;
     uint16_t m_debounce_delay_ms;

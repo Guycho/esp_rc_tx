@@ -4,12 +4,12 @@
 #include <OTAHandler.h>
 #include <TelnetStream.h>
 
+#include "bt_app_connector.h"
 #include "config.h"
 #include "input.h"
 #include "pin_reader.h"
 #include "pot_reader.h"
 #include "transceiver.h"
-#include "bt_app_connector.h"
 
 PinReader pin_readers[Config::num_buttons];
 PotReader pot_readers[Config::num_potentiometers];

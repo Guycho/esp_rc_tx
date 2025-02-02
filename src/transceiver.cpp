@@ -68,7 +68,7 @@ void Transceiver::send_data() {
 
     // Create a bitmask for the boolean values and scaled throttle/steering
     uint32_t bitmask = 0;
-    bitmask |= (scaled_throttle << 0);   // 9 bits for throttle
+    bitmask |= (scaled_throttle << 0);  // 9 bits for throttle
     bitmask |= (scaled_steering << 9);  // 9 bits for steering
     bitmask |= (m_input_controller_data.left_arrow << 18);
     bitmask |= (m_input_controller_data.right_arrow << 19);

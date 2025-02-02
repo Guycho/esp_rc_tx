@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include <Arduino.h>
+
 #include "credentials.h"
 namespace Config {
 enum ButtonName {
@@ -41,8 +42,8 @@ namespace Transceiver {
 const uint16_t update_delay_ms = 25;
 }  // namespace Transceiver
 namespace BTAppConnector {
-  extern const char *device_name;
-  const uint8_t update_rate_hz = 10;
+extern const char *device_name;
+const uint8_t update_rate_hz = 10;
 }  // namespace BTAppConnector
 namespace ESPNow {
 const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};

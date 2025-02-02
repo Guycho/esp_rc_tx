@@ -26,10 +26,10 @@ void PotReader::run() {
                            : Calcs::map_float(temp_value, m_min_input_value, m_max_input_value,
                                m_min_output_value, m_max_output_value);
     float mapped_value = temp_value > m_mid_pct_input_value
-                             ? Calcs::map_float(temp_value, m_mid_pct_input_value, m_max_output_value,
-                                                0, m_max_output_value)
-                             : Calcs::map_float(temp_value, m_min_output_value, m_mid_pct_input_value,
-                                                m_min_output_value, 0);
+                           ? Calcs::map_float(temp_value, m_mid_pct_input_value, m_max_output_value,
+                               0, m_max_output_value)
+                           : Calcs::map_float(temp_value, m_min_output_value, m_mid_pct_input_value,
+                               m_min_output_value, 0);
     m_value = Calcs::calc_dead_band(mapped_value, m_max_output_value, m_dead_band);
 }
 float PotReader::get_value() {
