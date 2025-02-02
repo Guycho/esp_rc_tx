@@ -18,23 +18,6 @@ void BTAppConnector::run() {
     }
     TelemetryData telemetry_data = m_transceiver->get_telemetry_data();
     JsonDocument m_json_data;
-    // Fake values for testing --------------------------------
-    telemetry_data.arm_state = true;
-    telemetry_data.steering_mode = 1;
-    telemetry_data.drive_mode = 2;
-    telemetry_data.battery_status = 1;
-    for (uint8_t i = 0; i < 4; ++i) {
-        telemetry_data.motors_rpm[i] = 1500 + i * 1000;
-        telemetry_data.motors_throttle[i] = 50 + i * 10;
-    }
-    telemetry_data.battery_voltage = 12.6;
-    for (uint8_t i = 0; i < 2; ++i) {
-        telemetry_data.steering_values[i] = 30 + i * 5;
-    }
-    telemetry_data.g_force_x = 1.2;
-    telemetry_data.g_force_y = -0.8;
-    telemetry_data.rotation_rate_z = 50;
-    //-------------------------------------------------
     m_json_data["arm_enabled"] = telemetry_data.arm_state ? "Armed" : "Disarmed";
     m_json_data["steering_mode"] = telemetry_data.steering_mode == 0 ? "Normal" : "Gyro";
     m_json_data["drive_mode"] = telemetry_data.drive_mode == 0   ? "AWD"
@@ -42,7 +25,8 @@ void BTAppConnector::run() {
                                                                  : "RWD";
     m_json_data["battery_status"] = telemetry_data.battery_status == 0   ? "Normal"
                                     : telemetry_data.battery_status == 1 ? "Low"
-                                                                         : "Critical";
+                                    : telemetry_data.battery_status == 2 ? "Critical"
+                                                                      : "USB";
     for (uint8_t i = 0; i < 4; ++i) {
         m_json_data["motor_rpm"][i] = telemetry_data.motors_rpm[i];
         m_json_data["motor_throttle"][i] = abs(telemetry_data.motors_throttle[i]);

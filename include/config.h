@@ -29,7 +29,7 @@ const bool buttons_on_states[num_buttons] = {false, false, false, false, false, 
   false, false, false, false, false, false};
 const bool buttons_type_event[num_buttons] = {false, true, true, true, true, false, true, true,
   true, true, false, false, false, false};
-const float potentiometers_dead_band = 5.0;
+const float potentiometers_dead_band = 7.5;
 const double max_output_value = 100.0;
 const uint8_t num_potentiometers = 2;
 const uint8_t analog_read_resolution = 12;
