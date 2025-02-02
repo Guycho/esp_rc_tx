@@ -64,5 +64,6 @@ void setup() {
 }
 void loop() {
     transceiver.run();
+    bt_app_connector.run();
     ota_handler.run();
 }

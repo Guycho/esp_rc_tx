@@ -2,7 +2,7 @@
 
 namespace Config {
 namespace BTAppConnector {
-const char *device_name = "RemoteControl";
+const char *device_name = "ESPRemoteController";
 }  // namespace BTAppConnector
 namespace OTAHandler {
 const char *credentials[num_networks][2] = {{WIFI_SSID1, WIFI_PASSWORD2},
