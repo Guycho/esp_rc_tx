@@ -25,38 +25,43 @@ void Transceiver::run() {
 
 TelemetryData Transceiver::get_telemetry_data() { return m_telemetry_data; }
 
-
 TelemetryData Transceiver::parse_remote_data(const String& data) {
     JsonDocument m_json_data;
     deserializeJson(m_json_data, data);
-    // Extract the bitmask from the JSON document
-    uint32_t bitmask_value = m_json_data["b"];
     TelemetryData telemetry_data;
-    const uint8_t bitmask_size = sizeof(typeof(telemetry_data));
-    std::bitset<bitmask_size> bitmask(bitmask_value);
-    uint8_t* data_ptr = reinterpret_cast<uint8_t*>(&telemetry_data);
-    for (size_t i = 0; i < sizeof(TelemetryData); ++i) {
-        std::bitset<8> byte((bitmask >> (i * 8)).to_ulong() & 0xFF);
-        data_ptr[i] = static_cast<uint8_t>(byte.to_ulong());
+    const size_t data_size = sizeof(typeof(telemetry_data)) * 8;
+    std::bitset<data_size> bitmask;
+    uint8_t num_of_bitmasks = data_size / (sizeof(uint32_t) * 8);
+    uint32_t bitmasks[num_of_bitmasks];
+    for (uint8_t i = 0; i < num_of_bitmasks; ++i) {
+        bitmasks[i] = m_json_data["b"][i];
+        for (uint8_t j = 0; j < 32 && (i * 32 + j) < bitmask.size(); ++j) {
+            bitmask[i * 32 + j] = (bitmasks[i] & (1UL << j));
+        }
     }
+    memcpy(&telemetry_data, &bitmask, sizeof(typeof(telemetry_data)));
     return telemetry_data;
 }
 
 void Transceiver::send_data() {
     JsonDocument m_json_data;
     String json;
+    const size_t data_size = sizeof(typeof(m_input_controller_data)) * 8;
+    std::bitset<data_size> bitmask;
+    memcpy(&bitmask, &m_input_controller_data, sizeof(typeof(m_input_controller_data)));
 
-    const uint8_t bitmask_size = sizeof(typeof(m_input_controller_data));
-    std::bitset<bitmask_size> bitmask;
+    uint8_t num_of_bitmasks = data_size / (sizeof(uint32_t) * 8);
 
-    uint8_t* data_ptr = reinterpret_cast<uint8_t*>(&m_input_controller_data);
-    for (size_t i = 0; i < sizeof(typeof(m_input_controller_data)); ++i) {
-        std::bitset<8> byte(data_ptr[i]);
-        bitmask |= (std::bitset<bitmask_size>(byte.to_ulong()) << (i * 8));
+    uint32_t bitmasks[num_of_bitmasks];
+    for (uint8_t i = 0; i < num_of_bitmasks; ++i) {
+        bitmasks[i] = 0;
+        for (uint8_t j = 0; j < 32 && (i * 32 + j) < bitmask.size(); ++j) {
+            if (bitmask[i * 32 + j]) {
+                bitmasks[i] |= (1UL << j);
+            }
+        }
+        m_json_data["b"][i] = bitmasks[i];
     }
-
-    m_json_data["b"] = bitmask.to_ullong();
-
     serializeJson(m_json_data, json);
 
     m_json_data["c"] = Calcs::calc_checksum(json);

@@ -3,11 +3,11 @@
 
 #include <ArduinoJson.h>
 #include <Chrono.h>
-#include <WiFi.h>
-#include <bitset>
 #include <ESP_now_handler.h>
-
+#include <WiFi.h>
 #include <utils.h>
+
+#include <bitset>
 
 #include "config.h"
 #include "input.h"
