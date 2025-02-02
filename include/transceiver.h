@@ -40,7 +40,6 @@ class Transceiver {
     void send_data();
     bool verify_checksum(const String &data);
     TelemetryData parse_remote_data(const String &data);
-    void update_ui();    
     Chrono m_data_timer;
 
     InputControllerData m_input_controller_data;

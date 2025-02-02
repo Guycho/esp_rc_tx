@@ -23,6 +23,8 @@ void Transceiver::run() {
     send_data();
 }
 
+TelemetryData Transceiver::get_telemetry_data() { return m_telemetry_data; }
+
 bool Transceiver::verify_checksum(const String& data) {
     JsonDocument m_json_data;
     deserializeJson(m_json_data, data);

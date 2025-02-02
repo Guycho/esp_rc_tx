@@ -40,6 +40,10 @@ const float potentiometers_mid_pct_input_values[num_potentiometers] = {-49.0, -8
 namespace Transceiver {
 const uint16_t update_delay_ms = 25;
 }  // namespace Transceiver
+namespace BTAppConnector {
+  extern const char *device_name;
+  const uint8_t update_rate_hz = 10;
+}  // namespace BTAppConnector
 namespace ESPNow {
 const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
 const bool use_lr = true;

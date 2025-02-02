@@ -9,6 +9,7 @@
 #include "pin_reader.h"
 #include "pot_reader.h"
 #include "transceiver.h"
+#include "bt_app_connector.h"
 
 PinReader pin_readers[Config::num_buttons];
 PotReader pot_readers[Config::num_potentiometers];
@@ -19,6 +20,8 @@ OTAHandler ota_handler(Config::OTAHandler::hostname, Config::OTAHandler::credent
   Config::OTAHandler::num_networks, Config::OTAHandler::timeout_sec,
   Config::OTAHandler::print_debug);
 Transceiver transceiver;
+BluetoothSerial bt_serial;
+BTAppConnector bt_app_connector;
 
 void setup() {
     Serial.begin(9600);
@@ -49,6 +52,12 @@ void setup() {
       .update_delay_ms = Config::Transceiver::update_delay_ms};
     transceiver.init(transceiver_config);
 
+    BTAppConnectorConfig bt_app_connector_config = {.transceiver = &transceiver,
+      .bt_serial = &bt_serial,
+      .device_name = Config::BTAppConnector::device_name,
+      .update_rate_hz = Config::BTAppConnector::update_rate_hz};
+
+    bt_app_connector.init(bt_app_connector_config);
     ota_handler.init();
 
     TelnetStream.begin();
