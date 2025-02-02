@@ -29,7 +29,7 @@ void InputController::run() {
     m_data.edge_switch = m_buttons[EDGE_SWITCH]->get_state();
     m_data.bottom_switch = m_buttons[BOTTOM_SWITCH]->get_state();
 }
-InputControllerData InputController::get_data() {
+RemoteControllerData InputController::get_data() {
     run();
     return m_data;
 }

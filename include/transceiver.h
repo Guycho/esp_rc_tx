@@ -3,18 +3,14 @@
 
 #include <ArduinoJson.h>
 #include <Chrono.h>
-#include <ESP_now_handler.h>
 #include <WiFi.h>
+#include <bitset>
+#include <ESP_now_handler.h>
+
+#include <utils.h>
 
 #include "config.h"
 #include "input.h"
-
-struct TelemetryData {
-    bool arm_state;
-    uint8_t steering_mode;
-    uint8_t drive_mode;
-    uint8_t battery_status;
-};
 
 struct TransceiverConfig {
     InputController *input_controller;
@@ -41,7 +37,7 @@ class Transceiver {
     TelemetryData parse_remote_data(const String &data);
     Chrono m_data_timer;
 
-    InputControllerData m_input_controller_data;
+    RemoteControllerData m_input_controller_data;
     TelemetryData m_telemetry_data;
     String m_remote_data;
     uint16_t m_update_delay_ms;
