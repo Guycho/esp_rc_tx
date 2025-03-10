@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include <Chrono.h>
 #include <ESP_now_handler.h>
-#include <OTAHandler.h>
-#include <TelnetStream.h>
 
 #include "bt_app_connector.h"
 #include "config.h"
@@ -16,9 +14,6 @@ PotReader pot_readers[Config::num_potentiometers];
 InputController input_controller;
 ESPNowHandler esp_now_handler(Config::ESPNow::peer_mac_address, Config::ESPNow::use_lr,
   Config::ESPNow::print_debug);
-OTAHandler ota_handler(Config::OTAHandler::hostname, Config::OTAHandler::credentials,
-  Config::OTAHandler::num_networks, Config::OTAHandler::timeout_sec,
-  Config::OTAHandler::print_debug);
 Transceiver transceiver;
 BluetoothSerial bt_serial;
 BTAppConnector bt_app_connector;
@@ -58,12 +53,8 @@ void setup() {
       .update_rate_hz = Config::BTAppConnector::update_rate_hz};
 
     bt_app_connector.init(bt_app_connector_config);
-    ota_handler.init();
-
-    TelnetStream.begin();
 }
 void loop() {
     transceiver.run();
     bt_app_connector.run();
-    ota_handler.run();
 }

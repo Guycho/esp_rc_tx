@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 
-#include "credentials.h"
 namespace Config {
 enum ButtonName {
     EDGE_SWITCH = 0,
@@ -46,16 +45,10 @@ extern const char *device_name;
 const uint8_t update_rate_hz = 10;
 }  // namespace BTAppConnector
 namespace ESPNow {
-const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
+// const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
+const uint8_t peer_mac_address[] = {0x24, 0xD7, 0xEB, 0x97, 0x90, 0x2C};  // E9 EA EB
 const bool use_lr = true;
-const bool print_debug = false;
+const bool print_debug = true;
 }  // namespace ESPNow
-namespace OTAHandler {
-const uint8_t num_networks = 3;
-const uint16_t timeout_sec = 60;
-const bool print_debug = false;
-extern const char *credentials[][2];
-extern const char *hostname;
-}  // namespace OTAHandler
 }  // namespace Config
 #endif  // CONFIG_H
