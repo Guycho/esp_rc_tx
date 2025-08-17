@@ -19,7 +19,12 @@ BluetoothSerial bt_serial;
 BTAppConnector bt_app_connector;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
+    
+    // Print actual MAC address
+    Serial.print("TX MAC Address: ");
+    Serial.println(WiFi.macAddress());
+    
     InputControllerConfig input_controller_config;
     for (uint8_t i = 0; i < Config::num_buttons; i++) {
         PinReaderConfig pin_reader_config = {.pin = Config::buttons_pins[i],

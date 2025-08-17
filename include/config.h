@@ -46,7 +46,7 @@ const uint8_t update_rate_hz = 10;
 }  // namespace BTAppConnector
 namespace ESPNow {
 // const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x04, 0x2D, 0x98};
-const uint8_t peer_mac_address[] = {0x24, 0xD7, 0xEB, 0x97, 0x90, 0x2C};  // E9 EA EB
+const uint8_t peer_mac_address[] = {0xA0, 0xDD, 0x6C, 0x03, 0x9E, 0x40};  // RX MAC
 const bool use_lr = true;
 const bool print_debug = true;
 }  // namespace ESPNow
